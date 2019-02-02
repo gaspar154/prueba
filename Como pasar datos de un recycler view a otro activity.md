@@ -1,7 +1,7 @@
 Como puedo hacer para pasar los datos de mi recicler view a otro activity
-quiero que cuando clickee sobre un item me mande la informacion de ese item a otro activity junto a su ID de Firebasepara que en la otra actividad yo pueda manupular su informacion ya sea editarla o borrarla
-
-esta seria la clase principal
+quiero que cuando clickee sobre un item me mande la informacion de ese item a otro activity junto a su ID de Firebasepara que en la otra actividad yo pueda manupular su informacion ya sea editarla o borrarla 
+vease que ya logre el evento onclick pero por ahora solo muestr aun toast ycambia a la actividad
+esta szeria la clase principal
 
 public class Buscarservicios extends AppCompatActivity  {
 
