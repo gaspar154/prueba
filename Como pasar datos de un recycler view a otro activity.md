@@ -24,8 +24,6 @@ public class Buscarservicios extends AppCompatActivity  {
         rv.setLayoutManager(new LinearLayoutManager(this));
 
 
-       context = itemView.getContext()
-
          serviciosList = new ArrayList<>();
         try{
         firebaseDatabase = FirebaseDatabase.getInstance();
