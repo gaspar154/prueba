@@ -1,40 +1,7 @@
+Como puedo hacer para pasar los datos de mi recicler view a otro activity
+quiero que cuando clickee sobre un item me mande la informacion de ese item a otro activity junto a su ID de Firebasepara que en la otra actividad yo pueda manupular su informacion ya sea editarla o borrarla
 
-import android.content.Context;
-import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.AdapterView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.gaspar.bgodriver.objetos.Servicios;
-import com.example.gaspar.bgodriver.objetos.adapter;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.example.gaspar.bgodriver.R.id.parent;
-import static com.example.gaspar.bgodriver.R.id.recicler;
-import static com.example.gaspar.bgodriver.R.id.start;
+esta seria la clase principal
 
 public class Buscarservicios extends AppCompatActivity  {
 
@@ -108,6 +75,123 @@ public class Buscarservicios extends AppCompatActivity  {
          });
 
 
+    }
+}
+
+
+Este el adaptador
+
+
+public  class adapter extends RecyclerView.Adapter<adapter.Serviciosviewholder>
+implements View.OnClickListener {
+
+    List<Servicios>servicios;
+    private View.OnClickListener listener;
+
+    
+
+    public adapter(List<Servicios> servicios) {
+        this.servicios = servicios;
+
+    }
+
+    @NonNull
+    @Override
+    public Serviciosviewholder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemview, parent,false);
+        Serviciosviewholder holder = new Serviciosviewholder(v);
+
+        v.setOnClickListener(this);
+
+        return holder;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull Serviciosviewholder holder, int position) {
+
+        Servicios servicios1= servicios.get(position);
+        holder.txtNombre.setText(""+servicios1.getNombre());
+
+        // holder.txtNombre.setText(servi.getNombre());
+
+
+
+    }
+    @Override
+    public int getItemCount() {
+        return servicios.size();//devulve el numero de filoas de reciclrevirewno
+    }
+
+    public void setOnclickListenes(View.OnClickListener listener){
+        this.listener=listener;
+    }
+    @Override
+    public void onClick(View v) {
+
+       if (listener!=null){
+      listener.onClick(v);
+
+       }
+
+    }
+
+    public static class Serviciosviewholder extends RecyclerView.ViewHolder{
+
+    TextView txtNombre;
+
+    public Serviciosviewholder(@NonNull View itemView) {
+        super(itemView);
+
+      txtNombre=(TextView) itemView.findViewById(R.id.txt_Nom);
+
+
+    }
+}
+}
+
+
+este mi POJO
+
+public class Servicios {
+
+     private String Nombre;
+     private float LatitudDestino; //float
+     private float LongitudDestino;
+     private float OrigenLat;
+     private float OrigenLong;
+     private String Status;
+    Servicios() {}
+    public Servicios(String nombre, float latitudDestino, float longitudDestino, float origenLat, float origenLong, String status) {
+        Nombre = nombre;
+        LatitudDestino = latitudDestino;
+        LongitudDestino = longitudDestino;
+        OrigenLat = origenLat;
+        OrigenLong = origenLong;
+        Status = status;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public float getLatitudDestino() {
+        return LatitudDestino;
+    }
+
+    public float getLongitudDestino() {
+        return LongitudDestino;
+    }
+
+    public float getOrigenLat() {
+        return OrigenLat;
+    }
+
+    public float getOrigenLong() {
+        return OrigenLong;
+    }
+
+    public String getStatus() {
+        return Status;
     }
 }
 
